@@ -20,14 +20,16 @@ class OffersServiceTest extends Specification {
         offers.collect { it.id as int } == expectedOfferIds
 
         where:
-        offset | limit || expectedOfferIds
-        null   | null  || [1, 2, 3, 4, 5, 6, 7, 8]
-        null   | 1     || [1]
-        null   | 3     || [1, 2, 3]
-        null   | 5     || [1, 2, 3, 4, 5]
-        null   | 10    || [1, 2, 3, 4, 5, 6, 7, 8]
+        offset | limit | expectedOfferIds
+        null   | null  | [1, 2, 3, 4, 5, 6, 7, 8]
+        null   | 1     | [1]
+        null   | 3     | [1, 2, 3]
+        null   | 5     | [1, 2, 3, 4, 5]
+        null   | 10    | [1, 2, 3, 4, 5, 6, 7, 8]
+        null   | 10    | [1, 2, 3, 4, 5, 6, 7, 8]
     }
 
+    @Unroll
     def 'exception on invalid limit'() {
         when:
         offersService.getOffers(-1, null)
@@ -36,6 +38,7 @@ class OffersServiceTest extends Specification {
         thrown(InvalidPaginationException)
     }
 
+    @Unroll
     def 'should throw exception when adding offer on not allowed account status'() {
         given:
         accountStatusClient.getAccountStatus('user-id') >> accountStatus
