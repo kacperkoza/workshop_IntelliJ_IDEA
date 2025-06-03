@@ -16,7 +16,11 @@
  */
 package com.example.workshops_IntelliJ_IDEA.offer;
 
-import com.example.workshops_IntelliJ_IDEA.lang3.*;
+import com.example.workshops_IntelliJ_IDEA.lang3.ArrayUtils;
+import com.example.workshops_IntelliJ_IDEA.lang3.CharSequenceUtils;
+import com.example.workshops_IntelliJ_IDEA.lang3.CharUtils;
+import com.example.workshops_IntelliJ_IDEA.lang3.Charsets;
+import com.example.workshops_IntelliJ_IDEA.lang3.ObjectUtils;
 import com.example.workshops_IntelliJ_IDEA.lang3.function.ToBooleanBiFunction;
 import com.example.workshops_IntelliJ_IDEA.lang3.text.WordUtils;
 
