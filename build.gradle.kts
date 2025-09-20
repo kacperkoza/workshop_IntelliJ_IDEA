@@ -45,7 +45,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 tasks.test {
-    // Remove useJUnitPlatform() since we're using Spock Framework
+    useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed")
     }
