@@ -1,16 +1,17 @@
 plugins {
     java
     groovy
-    kotlin("jvm") version "1.5.30-RC"
-    id("org.springframework.boot") version "2.5.3"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("jvm") version "2.0.21"
+    id("org.springframework.boot") version "3.3.4"
+    id("io.spring.dependency-management") version "1.1.6"
+    id("org.jetbrains.kotlin.plugin.spring") version "2.0.21"
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 springBoot {
@@ -22,26 +23,34 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
-    implementation("org.springframework.boot:spring-boot-starter-web:2.5.3")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
-    testImplementation("org.spockframework:spock-spring:1.3-groovy-2.5")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.3")
-}
-
-tasks.compileKotlin {
-    kotlinOptions {
-        jvmTarget = "11"
+    testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
+    testImplementation("org.spockframework:spock-spring:2.3-groovy-4.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.junit.jupiter")
+        exclude(group = "org.junit.vintage")
     }
 }
 
-tasks.compileTestKotlin {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "21"
     }
+}
+
+tasks.test {
+    // Remove useJUnitPlatform() since we're using Spock Framework
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.wrapper {
+    gradleVersion = "8.10.2"
 }

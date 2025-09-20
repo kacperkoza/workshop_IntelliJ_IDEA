@@ -1,14 +1,14 @@
 package com.example.workshops_IntelliJ_IDEA
 
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.web.client.RestTemplate
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = [AppRunner.class]
 )
-class InegrationTest {
+class IntegrationTest {
 
     @LocalServerPort
     int port
